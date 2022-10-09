@@ -1,5 +1,5 @@
 public class task1 {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         task_name(1, "remainder");
         System.out.println(remainder(1, 3));
         System.out.println(remainder(3, 4));
