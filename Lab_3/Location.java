@@ -28,11 +28,13 @@ public class Location
 
     @Override 
     public boolean equals(Object obj) {
-        if (obj instanceof Location) {
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
+        else {
             Location loc = (Location) obj;
             return this.xCoord == loc.xCoord && this.yCoord == loc.yCoord ? true : false;
         }
-        return false;
     }
 
     @Override
