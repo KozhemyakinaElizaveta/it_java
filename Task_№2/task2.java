@@ -109,18 +109,15 @@ public class task2 {
     }
 
     public static boolean isValid(String index) {
-        return (index.length() == 5) && index.matches("[\\d]+") ? true : false;
+        return (index.length() <= 5) && index.matches("[\\d]+") ? true : false;
     }
 
     public static boolean isStrangePair(String a, String b) {
         if (a.equals("") && b.equals("")) {
             return true;
         }
-        else if (a != "" && b != "") {
-            return (a.charAt(0) == b.charAt(b.length()-1) && b.charAt(0) == a.charAt(a.length()-1)) ? true : false;
-        }
         else {
-            return false;
+            return (a.charAt(0) == b.charAt(b.length()-1) && b.charAt(0) == a.charAt(a.length()-1)) ? true : false;
         }
     }
 
