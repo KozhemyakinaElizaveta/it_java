@@ -64,11 +64,14 @@ public class task3 {
         System.out.println("--- Task #" + task + " --- " + name + " ---");
     }
 
+    //число решений уравнения
     private static int solutions(int[] arr) {
         if ((arr[1]*arr[1] - 4 * arr[0]*arr[2]) > 0) return 2;
         else if ((arr[1]*arr[1] - 4 * arr[0]*arr[2]) == 0) return 1;
         else return 0;
     }
+
+    //позиция второго вхождения zip
     private static int findZip(String name) {
         boolean first = false;
         for (int i = 0; i < name.length(); i++) {
@@ -81,6 +84,7 @@ public class task3 {
         return -1;
     }
 
+    //является ли число совершенным
     private static boolean checkPerfect(int x) {
         int sum = 0;
         for (int i = 1; i < x; i++) {
@@ -91,6 +95,7 @@ public class task3 {
         return (sum == x) ? true : false;
     }
 
+    //возвращает новую строку с заменой ее первого и последнего символов
     private static String flipEndChars(String s) {
         if (s.length() < 2) {
             return "Incompatible.";
@@ -101,10 +106,21 @@ public class task3 {
         return s.charAt(s.length() - 1) + "" + s.subSequence(1, s.length() - 1) + s.charAt(0);
     }
 
-    public static boolean isValidHexCode(String s) {
-        return s.matches("^#[a-fA-F0-9]{6}") ? true : false;
+    //является ли строка допустимым шестнадцатеричным кодом
+    public static boolean isValidHexCode(String str) {
+        String s = "abcdef1234567890";
+        String substr = (str.toLowerCase()).substring(1);
+        if (str.charAt(0) == '#' && substr.length() == 6) {
+            for (int i = 0; i < substr.length(); i++) {
+                if (s.indexOf(substr.charAt(i)) != -1) continue;
+                else return false;
+            }
+        }
+        else return false;
+        return true;
     }
 
+    //одинаковое количество уникальных элементов
     public static boolean same(Integer[] arr1, Integer[] arr2) {
         int distinctIntegers1 = 0;
         int distinctIntegers2 = 0;
@@ -139,6 +155,7 @@ public class task3 {
         return (distinctIntegers1 == distinctIntegers2) ? true : false;
     }
 
+    //число Капрекара
     public static boolean isKaprekar(int x) {
         if (x == 0 || x == 1)
             return true;
@@ -149,7 +166,6 @@ public class task3 {
         String s = xx.toString();
         String left = "";
         String right = "";
-
         if (s.length() % 2 == 0) {
             left = String.copyValueOf(s.toCharArray(), 0, (s.length()) / 2);
             right = String.copyValueOf(s.toCharArray(), (s.length()) / 2, s.length() / 2);
@@ -161,6 +177,7 @@ public class task3 {
         return ans == x ? true : false;
     }
 
+    //возвращает самую длинную последовательность последовательных нулей в двоичной строке
     public static String longestZero(String s) {
         int max_count = 0;
         int x = 0;
@@ -178,23 +195,24 @@ public class task3 {
         return sRepeated;
     }
 
+    //возвращает следующее простое число
     public static int nextPrime(int x) {
-        if (x < 3) {
-            return 2;
-        }
-        while (!isPrime(x)) {
-            x++;
+        boolean isPrime = false;
+        while (isPrime != true) {
+            for(int i = 2; i <= Math.sqrt(x); i++) {
+                if ((x % i) == 0) {
+                    isPrime = false;
+                    x++;
+                }
+                else {
+                    isPrime = true;
+                }
+            }   
         }
         return x;
     }
-    private static boolean isPrime(int x) {
-        for (int i = 2; i <= Math.sqrt(x); i++) {
-            if (x % i == 0)
-                return false;
-        }
-        return true;
-    }
 
+    //являются ли они ребрами прямоугольного треугольника
     public static boolean rightTriangle(int a, int b, int c) {
         int gip = 0;
         int kat1 = 0;
