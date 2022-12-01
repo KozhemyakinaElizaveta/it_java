@@ -1,7 +1,8 @@
-package Lab_4;
+package Lab_6;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 
+//Класс дисплея, наследуемый от JComponent
 public class JImageDisplay extends javax.swing.JComponent{
     private BufferedImage buffImage;
 
@@ -28,5 +29,9 @@ public class JImageDisplay extends javax.swing.JComponent{
     //Метод для установки пикселя в определенный цвет
     public void drawPixel(int x, int y, int color){
         buffImage.setRGB(x, y, color);
+    }
+
+    public BufferedImage getImage(){
+        return buffImage;
     }
 }
