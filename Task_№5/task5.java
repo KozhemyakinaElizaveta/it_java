@@ -120,13 +120,19 @@ public class task5 {
 
     /** Функция проверяет все ли символы строки subword последовательно находятся в строке word*/
     public static boolean canComplete(String subword, String word) {
-        int startIdx = 0;
-        for (int i = 0; i < subword.length(); i++) {
-            int idx = word.indexOf(subword.charAt(i), startIdx);
-            if (idx == -1) return false;
-            startIdx = idx + 1;
+        int subwordLength = subword.length();
+        int subNum = 0;
+        for (int i = 0; i < word.length(); i++){
+            if (word.charAt(i) == subword.charAt(subNum)) {
+                subNum += 1;
+            }
         }
-        return true;
+        if (subNum == subwordLength){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /** Функция перемножает цифры суммы всех чисел до тех пор, пока не получится однозначное число */

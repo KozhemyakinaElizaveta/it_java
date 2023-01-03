@@ -28,10 +28,10 @@ public class task6 {
         System.out.println(stripUrlParams("https://edabit.com", new String[] {"b"}));
 
         task_name(5, "getHashTags");
-        System.out.println(getHashTags("How the Avocado Became the Fruit of the Global Trade"));
-        System.out.println(getHashTags("Why You Will Probably Pay More for Your Christmas Tree This Year"));
-        System.out.println(getHashTags("Hey Parents, Surprise, Fruit Juice Is Not Fruit"));
-        System.out.println(getHashTags("Science Visualizing"));
+        System.out.println(Arrays.toString(getHashTags("How the Avocado Became the Fruit of the Global Trade")));
+        System.out.println(Arrays.toString(getHashTags("Why You Will Probably Pay More for Your Christmas Tree This Year")));
+        System.out.println(Arrays.toString(getHashTags("Hey Parents, Surprise, Fruit Juice Is Not Fruit")));
+        System.out.println(Arrays.toString(getHashTags("Visualizing Science")));
 
         task_name(6, "ulam");
         System.out.println(ulam(4));
@@ -138,13 +138,10 @@ public class task6 {
         //Проверка строки на наличие скобок и затем обрезка их.
         if(color.charAt(0) != '(' || color.charAt(color.length() - 1) != ')')return false;
         color = color.substring(1, color.length() - 1);
-
-        //Разбка оставшихся чисел на массив строк.
+        //Разборка оставшихся чисел на массив строк.
         String[] numbers = color.split(",");
-
         //Проверка на то что цвет не в формате RGBA, а чисел не три.
         if(!isRgba && numbers.length != 3)return false;
-
         //Попытка спарсить три первых числа и сразу проверка на то, что они в интервале [0, 255].
         for(int i = 0; i < 3; i++){
             try{
@@ -241,7 +238,8 @@ public class task6 {
         //Слово, по которому будет проходить обработка.
         String lowerWord = word.toLowerCase();
         //Указатель на начало и конец слова.
-        int lIdx = 0; int rIdx = wordLength - 1;
+        int lIdx = 0; 
+        int rIdx = wordLength - 1;
         //Ищем с какого индекса начинается слово.
         while(allowed.indexOf(lowerWord.charAt(rIdx))== -1 && rIdx > -1)rIdx--;
         //Ищем до какого индекса длиться слово.
@@ -379,42 +377,28 @@ public class task6 {
         return answer.toString();
     }
 
-    /** Функция решает простейшие математические выражения путём обращения в рекурсию при каждой новой операции */
-    public static int solvePart(String part){
-        //Строка со всеми допущенными операциями.
-        String operations = "+-*/";
-        //Находим индекс символа операции в строке.
-        int idx = 0;
-        while(idx < part.length() && operations.indexOf(part.charAt(idx)) == -1)idx++;
-        //Если операция не найдена в строке, то мы считам что там уже нет операций и возвращаем число.
-        if(idx == part.length())return Integer.parseInt(part.strip());
-        //Получаем операцию и в зависимости от неё возвращаем рекурсивно обработку левой и правой части по необходимой операции.
-        char operation = part.charAt(idx);
-        return switch (operation) {
-            case '+' -> solvePart(part.substring(0, idx)) + solvePart(part.substring(idx + 1));
-            case '-' -> solvePart(part.substring(0, idx)) - solvePart(part.substring(idx + 1));
-            case '*' -> solvePart(part.substring(0, idx)) * solvePart(part.substring(idx + 1));
-            case '/' -> solvePart(part.substring(0, idx)) / solvePart(part.substring(idx + 1));
-            default -> 0;
-        };
-    }
-
     /** Функция проверяет строку с формулой на математическую достоверность*/
-    public static boolean formula(String form){
-        //Проверяем есть ли '=' в строке.
-        int equalsIdx = form.indexOf("=");
-        if(equalsIdx == -1)return false;
-        //Проверяем больше ли одного "=" в строке.
-        if(form.indexOf("=", equalsIdx + 1) != -1)return false;
-        //Разбиваем строку на две части по "=".
-        String[] parts = form.split("=");
-        //Если "=" в начале или конце строки, то формула неверна.
-        if(parts.length != 2)return false;
-        //Получаем вычисленные части формулы.
-        int leftPart = solvePart(parts[0]);
-        int rightPart = solvePart(parts[1]);
-        //Сравниваем их.
-        return leftPart == rightPart;
+    public static boolean formula(String str) {
+        String[] arr = str.split(" [+-/=\\*] ");
+        if (str.substring(str.indexOf("=") + 1).contains("=")) {
+            return false;
+        }
+        int a = Integer.parseInt(arr[0]);
+        int b = Integer.parseInt(arr[1]);
+        int c = Integer.parseInt(arr[2]);
+        if (a + b == c) {
+            return true;
+        }
+        else if (a - b == c) {
+            return true;
+        }
+        else if (a * b == c) {
+            return true;
+        }
+        else if (a / b == c) {
+            return true;
+        }
+        return false;
     }
 
     /** Функция проверяет является ли строка, содержащая чётное число, палиндромом */
